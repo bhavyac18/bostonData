@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Boston Data</title>
+  </head>
+  <body>
+    <div id="container">
+      <!-- populated by JS-->
+    </div>
+    <script src="./boston.js"></script>
+
+    <script>
+      function renderBoston(boston, container) {
+        var person = boston.data;
+
+        person.sort(function (a, b) {
+          return b[11] - a[11];
+        });
+        person.splice(5);
+
+        var bigPocketPerson = person.filter((person) => person[11] > 200000);
+        const len = bigPocketPerson.length; // boston is an array
+        var html = "";
+
+        html +=
+          "<h1> Number of people working in Boston earning over $200,000 is" +
+          len +
+          " </h1>";
+        for (let i = 0; i < len; i++) {
+          html +=
+            '<li class="boston">' +
+            "<h2>" +
+            bigPocketPerson[i][8] +
+            "</h2>" +
+            "<h3>" +
+            bigPocketPerson[i][11] +
+            "</h3>";
+        }
+        container.innerHTML = '<ul id = "boston">' + html + "</ul>";
+      }
+
+      renderBoston(boston, document.getElementById("container"));
+    </script>
+  </body>
+</html>
